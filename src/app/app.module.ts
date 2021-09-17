@@ -12,11 +12,14 @@ import { RegistrationComponent } from './component/registration/registration.com
 import { SharedModule } from './shared/shared.module';
 import { RouteGuard } from './routeguard.guard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from './service/toastr.service';
+import { ToastsContainer } from './shared/toastr.container';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -25,9 +28,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     SharedModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
   ],
-  providers: [RouteGuard],
+  providers: [RouteGuard,ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

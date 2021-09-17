@@ -7,14 +7,16 @@ import { ProductListComponent } from './productlist.component';
 import { CartComponent } from '../cart/cart.component';
 import { HeaderComponent } from '../header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsContainer } from 'src/app/shared/toastr.container';
 
 @NgModule({
   imports: [
     CommonModule,
     ProductsRoutingModule,
     SharedModule,
+    NgbModule
   ],
-  declarations: [ProductsComponent,ProductListComponent,CartComponent,HeaderComponent
+  declarations: [ProductsComponent,ProductListComponent,CartComponent,HeaderComponent,ToastsContainer
   ]
 })
 export class ProductsModule { }

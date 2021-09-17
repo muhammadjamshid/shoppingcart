@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/service/api.service';
 import { CartService } from 'src/app/service/cart.service';
+import { ToastService } from 'src/app/service/toastr.service';
 
 @Component({
   selector: 'app-productlist',
@@ -12,7 +14,7 @@ export class ProductListComponent implements OnInit {
   public productList : any ;
   public filterCategory : any
   searchKey:string ="";
-  constructor(private api : ApiService, private cartService : CartService) { }
+  constructor(private api : ApiService, private cartService : CartService,public toastService: ToastService) { }
 
   ngOnInit(): void {
     this.api.getProduct()
@@ -31,8 +33,8 @@ export class ProductListComponent implements OnInit {
   }
   addtocart(item: any){
     this.cartService.addtoCart(item);
+    this.toastService.show('Product added to the cart!', { classname: 'bg-success text-light', delay: 1000 });
   }
 
  
-
 }

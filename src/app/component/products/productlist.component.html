@@ -1,36 +1,38 @@
+<h1 class="title-shop"><u>SHOP NOW</u></h1>
 
 
-  <h1 class="title-shop"><u>SHOP NOW</u></h1>
-  <main class="main bd-grid">
-      <ng-container *ngFor="let item of filterCategory">
-          <div class="card">
-              <div class="card__img">
-                  <img src="{{item.image}}" alt="">
-              </div>
-              <div class="card__name">
-                  <p>{{item.title | trim}}</p>
-              </div>
-              <div class="card__precis">
-                  <a href="" class="card__icon" ></a>
-                  
-                  <div>
-                      <!-- <span class="card__preci card__preci--before">{{item.description | trim}}</span> -->
-                      <span class="card__preci card__preci--now">₹{{item.price}}</span>
-                      <span class="card__preci card__preci--now" (click)=addtocart(item)><i class="cart-icon fas fa-shopping-cart"></i></span>
-                  </div>
-              </div>
-          </div>
-      </ng-container>
-    
 
-    
+<main class="main bd-grid">
+ 
 
-    
+    <ng-container *ngFor="let item of filterCategory">
+        <div class="card">
+            <div class="card__img">
+                <img src="{{item.image}}" alt="">
+            </div>
+            <div class="card__name">
+                <p>{{item.title | trim}}</p>
+            </div>
+            <div class="card__precis">
+                <a href="" class="card__icon"></a>
 
-     
-  </main>
-
+                <div>
+                    <span class="card__preci card__preci--now">₹{{item.price}}</span>
+                    <span class="card__preci card__preci--now" (click)=addtocart(item)><i
+                            class="cart-icon fas fa-shopping-cart"></i></span>
+                </div>
+           
+            </div>
+        </div>
+      
+    </ng-container>
+   
 
 
 
 
+
+
+</main>
+
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

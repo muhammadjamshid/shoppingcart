@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-registration',
@@ -8,6 +11,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  private _success = new Subject<string>();
+  successMessage = '';
+  @ViewChild('selfClosingAlert', { static: false })
+  selfClosingAlert!: NgbAlert;
 
   registrationForm!: FormGroup;
   submitted = false;
@@ -17,7 +24,21 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void {  
     this.initializeForm();
+
+
+    this._success.subscribe(message => this.successMessage = message);
+    this._success.pipe(debounceTime(1000)).subscribe(() => {
+      if (this.selfClosingAlert) {
+        this.selfClosingAlert.close();
+    this.router.navigate(['/products/productlist']);
+
+      }
+    });
   }
+
+  public changeSuccessMessage() { this._success.next(`${new Date()} - Message successfully changed.`); }
+
+
   initializeForm():void
   {
     this.registrationForm=this.fb.group({
@@ -46,9 +67,9 @@ export class RegistrationComponent implements OnInit {
     if (this.registrationForm.invalid) {
       return;
     }
+    this._success.next(`Registered Successfully`);
     var username=this.registrationForm.get('username')?.value;
     localStorage.setItem('username',username);
-    this.router.navigate(['/products/productlist']);
 
   }
   
