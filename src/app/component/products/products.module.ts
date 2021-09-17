@@ -6,14 +6,15 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProductListComponent } from './productlist.component';
 import { CartComponent } from '../cart/cart.component';
 import { HeaderComponent } from '../header/header.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    SharedModule
+    SharedModule,
   ],
-  declarations: [    ProductsComponent,ProductListComponent,CartComponent,HeaderComponent
+  declarations: [ProductsComponent,ProductListComponent,CartComponent,HeaderComponent
   ]
 })
 export class ProductsModule { }

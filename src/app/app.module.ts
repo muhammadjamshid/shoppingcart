@@ -11,6 +11,7 @@ import { TrimPipe } from './shared/trim.pipe';
 import { RegistrationComponent } from './component/registration/registration.component';
 import { SharedModule } from './shared/shared.module';
 import { RouteGuard } from './routeguard.guard';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { RouteGuard } from './routeguard.guard';
     HttpClientModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [RouteGuard],
   bootstrap: [AppComponent]
