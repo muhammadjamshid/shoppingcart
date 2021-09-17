@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CartService {
 
-  public cartItemList : any =[]
+  public cartItemList : Array<any> =[]
   public productList = new BehaviorSubject<any>([]);
 
   constructor() { }
@@ -19,17 +19,34 @@ export class CartService {
     this.productList.next(product);
   }
   addtoCart(product : any){
+
+
+    var index=this.cartItemList.findIndex(x=>x.id==product.id);
+    if(index!=-1)
+    {
+      this.cartItemList[index].quantity=+this.cartItemList[index].quantity+1;
+      this.productList.next(this.cartItemList);
+      this.getTotalPrice();
+
+      return;
+    }
+
+
     this.cartItemList.push(product);
     this.productList.next(this.cartItemList);
+    console.log(this.cartItemList);
+
     this.getTotalPrice();
 
 
   }
   getTotalPrice() : number{
     let grandTotal = 0;
-    this.cartItemList.map((a:any)=>{
-      grandTotal += a.total;
-    })
+
+    this.cartItemList.forEach(a => {
+      grandTotal = grandTotal+(a.total * a.quantity);
+    });
+   
     return grandTotal;
   }
   removeCartItem(product: any){
